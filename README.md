@@ -3,6 +3,8 @@
 ## Synopsis
 A javascript tool for viewing and managing organizational charts. Using JIT JS.
 
+[DEMO](http://rlopez0689.github.io/OrgChartJit/)
+
 ## Code Example
 Using a JSON you can display an organizational chart. Also, you can add nodes, delete nodes, edit nodes and view extra information of the nodes.
 
