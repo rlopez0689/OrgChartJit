@@ -3,13 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <title>Organization Chart Jit</title>
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <div id="infovis"></div>
+
+    <!--Modal Box to Add Entity-->
+    <div class="modal fade" id="addNodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="addModalLabel">A&ntilde;adir departamento</h4>
+                </div>
+                <div class="modal-body" style="padding: 20px 20px 0 !important;">
+                    <form id="addNodeForm">
+                        <div class="form-group m-t-lg">
+                            <label>Name:</label>
+                            <input id="new_node_name" type="text" class="form-control" name="add_node_name" required>
+                            <label>Code:</label>
+                            <input id="new_node_code" type="text" class="form-control" name="add_node_code">
+                            <label>Structure Type:</label>
+                            <select id="new_node_type" class="form-control" name="add_node_type" required>
+                                <option value="1">Type 1</option>
+                                <option value="2">Type 2</option>
+                                <option value="3">Type 3</option>
+                            </select>
+                            <label>Description:</label>
+                            <textarea id="new_node_description" class="form-control" name="add_node_description" rows="3"></textarea>
+                        </div>
+                        <input type="submit" id="submit_add_node" style="display:none;"/>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border-top: none">
+                    <button class="btn btn-primary" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="add_node" style="margin:0;">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ends Modal Box to Add Entity-->
+
+    <!--Modal Box to Delete Entity-->
+    <div class="modal fade" id="deleteNodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Delete Node</h4>
+                </div>
+                <div class="modal-body" style="padding: 20px 20px 0 !important;">
+                    <input type="hidden" id="node_to_remove_id" name="node_to_remove">
+                    <div class="form-group" id="delete_message_container">
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: none">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                    <button id="delete_node" class="btn btn-danger" style="margin:0;">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ends Modal Box to Delete Entity-->
+
+    <!--Modal Box to Info Entity-->
+    <div class="modal fade" id="infoNodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Node information</h4>
+                </div>
+                <div class="modal-body" style="padding: 20px 20px 0 !important;">
+                    <input type="hidden" id="node_id" name="node_to_remove">
+                    <div class="form-group" id="info_message_container">
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: none">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ends Modal Box to Info Entity-->
+
+
+    <!--Modal Box to Edit Entity-->
+    <div class="modal fade" id="editNodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit node</h4>
+                </div>
+                <div class="modal-body" style="padding: 20px 20px 0 !important;">
+                    <form id="editNodeForm">
+                        <div class="form-group m-t-lg">
+                            <label>Name:</label>
+                            <input id="edit_node_name" type="text" class="form-control" name="edit_node_name" required>
+                            <label>Code:</label>
+                            <input id="edit_node_code" type="text" class="form-control" name="edit_node_code">
+                            <label>Structure Type:</label>
+                            <select id="edit_node_type" class="form-control" name="edit_node_type">
+                                <option value="1">Type 1</option>
+                                <option value="2">Type 2</option>
+                                <option value="3">Type 3</option>
+                            </select>
+                            <label>Description:</label>
+                            <textarea id="edit_node_description" class="form-control" rows="3" name="edit_node_desciption"></textarea>
+                        </div>
+                        <input type="submit" id="submit_edit_node" style="display:none;"/>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border-top: none">
+                    <button class="btn btn-primary" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="edit_node" style="margin:0;">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ends Modal Box to Edit Entity-->
+
 </body>
 <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap -->
-<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jit.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/jquery/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/jit/jit.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/tree.organization.js" type="text/javascript" charset="utf-8"></script>
 </html>

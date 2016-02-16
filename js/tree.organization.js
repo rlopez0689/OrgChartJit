@@ -17,10 +17,9 @@ var timer;
 })();
 
 function init(){
-
     //get the container height to set the root node in the top
     var height = ($('#infovis').height() / 2) - 60;
-    var json = {};
+    var json = {"children":[{"name":"General Committee","id":80,"children":[{"name":"Executive Committee","id":81,"children":[{"name":"Executive Director","id":82,"children":[{"name":"Operation Assistant","id":83,"children":[{"name":"PC(EIGP)","id":85,"children":[{"name":"Officer","id":91,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Officer","type_id":1}}],"data":{"code":"3","type":"Type 2","description":"The description of PC(EIGP)","type_id":2}},{"name":"PC(SDP)","id":86,"children":[{"name":"Supervisor","id":92,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Supervisor","type_id":1}}],"data":{"code":"3","type":"Type 2","description":"The description of PC(SDP)","type_id":2}},{"name":"PC(HRRDP)","id":87,"children":[{"name":"Data Collector","id":93,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Data Collector","type_id":1}}],"data":{"code":"3","type":"Type 2","description":"The description of PC(HRRDP)","type_id":2}}],"data":{"code":"3","type":"Type 2","description":"The description of the Operation Assistant","type_id":2}},{"name":"Finance Assistant","id":84,"children":[{"name":"Chief Auditor","id":88,"children":[{"name":"Auditor","id":95,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Auditor","type_id":1}}],"data":{"code":"3","type":"Type 1","description":"The description of Chief Auditor","type_id":1}},{"name":"Chief Accountant","id":89,"children":[{"name":"Cashier","id":96,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Cashier","type_id":1}}],"data":{"code":"3","type":"Type 2","description":"The description of Chief Auditor","type_id":2}},{"name":"Chief Administrative Officer","id":90,"children":[{"name":"Store Keeper","id":97,"children":[],"data":{"code":"3","type":"Type 1","description":"The description of Store Keeper","type_id":1}}],"data":{"code":"3","type":"Type 1","description":"The description of Administrative Officer","type_id":1}}],"data":{"code":"3","type":"Type 2","description":"The description of the finance assistant","type_id":2}}],"data":{"code":"3","type":"Type 2","description":"The description of the executive director","type_id":2}}],"data":{"code":"2","type":"Type 2","description":"The description of the executive committee","type_id":2}}],"data":{"code":"1","type":"Type 1","description":"The description of the general committee","type_id":1}}],"name":"Technology Querétaro","id":0};
 
     //init Spacetree
     //Create a new ST instance
@@ -269,8 +268,8 @@ function show_delete_form($delete_link){
 function show_node_info($info_link){
     var $node = $info_link.closest('div.node');
     node = st.graph.getNode($node.attr('id'));
-    var message = '<div>Nombre: '+node.name+'<br>Descripción: '+node.data.description+'' +
-        '<br>Código: '+node.data.code+'<br>Tipo: '+node.data.type+'</div>';
+        var message = '<div>Name: '+node.name+'<br>Description: '+node.data.description+'' +
+        '<br>Code: '+node.data.code+'<br>Type: '+node.data.type+'</div>';
     $('#info_message_container').html(message);
     $('#node_id').val(node_id);
     $('#infoNodeModal').modal('show');
