@@ -259,7 +259,7 @@ function show_delete_form($delete_link){
     node_id = $node.attr('id');
     node_name = $node.find('label.node_name').html();
 
-    var message = '<div>Al eliminar el nodo <strong>'+node_name+'</strong>, se eliminaran todos los nodos hijos. ¿Desea continuar?</div>';
+    var message = '<div>If you delete the node <strong>'+node_name+'</strong>, all its children will be deleted. ¿Continue?</div>';
     $('#delete_message_container').html(message);
     $('#node_to_remove_id').val(node_id);
     $('#deleteNodeModal').modal('show');
@@ -287,24 +287,24 @@ function show_edit_form($edit_link){
 
 
 function add_movement_tree(){
-    show_loader($('#loader_diagram_organization'), $('#infovis'));
     $('#addNodeModal').modal('hide');
+    st.addSubtree(new_node_object, 'replot');
+    node = st.graph.getNode(node.id);
+    make_movement_action(node);
+    console.log(new_node_object);
     st.select(node.id, {
         onComplete: function () {
             st.addSubtree(new_node_object, 'replot');
             node = st.graph.getNode(node.id);
-            hide_loader($('#loader_diagram_organization'), $('#infovis'));
             make_movement_action(node);
         }
     });
 }
 
 function delete_movement_tree(){
-    show_loader($('#loader_diagram_organization'), $('#infovis'));
     $('#deleteNodeModal').modal('hide');
     parent_node = st.graph.getNode(parent_id);
     st.removeSubtree(node.id, true, 'replot');
-    hide_loader($('#loader_diagram_organization'), $('#infovis'));
     make_movement_action(parent_node);
 }
 
@@ -347,7 +347,7 @@ $( document ).ready(function() {
             "id": parseInt(add_to_node_id),
             "children": [{
                 "name": node_name,
-                "id": '',
+                "id": Math.floor((Math.random() * 10000) + 1),
                 "data":{
                     "code": node_code,
                     "type_id": node_type_id,
@@ -416,9 +416,7 @@ $( document ).ready(function() {
 
         st.select(node.id, {
             onComplete: function () {
-                show_loader($('#loader_diagram_organization'), $('#infovis'));
                 $('#editNodeModal').modal('hide');
-                hide_loader($('#loader_diagram_organization'), $('#infovis'));
             }
         });
     });

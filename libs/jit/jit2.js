@@ -452,7 +452,7 @@ $.event = {
     e = e || win.event;
     var doc = win.document;
     doc = doc.documentElement || doc.body;
-    //TODO(nico): make touch event handling better
+    //hacer: make touch event handling better
     if(e.touches && e.touches.length) {
       e = e.touches[0];
     }
@@ -2019,7 +2019,7 @@ var MouseEventsManager = new Class({
       var wheel = $.event.getWheel(event);
       that.handleEvent('MouseWheel', e, win, wheel);
     };
-    //TODO(nico): this is a horrible check for non-gecko browsers!
+    //hacer(nico): this is a horrible check for non-gecko browsers!
     if(!document.getBoxObjectFor && window.mozInnerScreenX == null) {
       $.addEvent(htmlCanvas, 'mousewheel', handleMouseWheel);
     } else {
@@ -2053,7 +2053,7 @@ var MouseEventsManager = new Class({
       getNodeCalled: false,
       getEdgeCalled: false,
       getPos: function() {
-        //TODO(nico): check why this can't be cache anymore when using edge detection
+        //hacer(nico): check why this can't be cache anymore when using edge detection
         //if(this.pos) return this.pos;
         var canvas = that.viz.canvas,
             s = canvas.getSize(),
@@ -3143,7 +3143,7 @@ var Canvas;
     }
   });
   //background canvases
-  //TODO(nico): document this!
+  //hacer(nico): document this!
   Canvas.Background = {};
   Canvas.Background.Circles = new Class({
     initialize: function(viz, options) {
@@ -3174,7 +3174,7 @@ var Canvas;
         ctx.stroke();
         ctx.closePath();
       }
-      //TODO(nico): print labels too!
+      //hacer(nico): print labels too!
     }
   });
 })();
@@ -5662,7 +5662,7 @@ Graph.Op = {
         var viz = this.viz;
         var options = $.merge(this.options, viz.controller, opt), root = viz.root;
         var graph;
-        //TODO(nico) this hack makes morphing work with the Hypertree. 
+        //hacer(nico) this hack makes morphing work with the Hypertree.
         //Need to check if it has been solved and this can be removed.
         viz.root = opt.id || viz.root;
         switch(options.type) {
@@ -6983,7 +6983,7 @@ Graph.Plot = {
           if(opt.hideLabels) that.labels.hideLabels(false);
           that.plot(opt);
           opt.onComplete();
-          //TODO(nico): This shouldn't be here!
+          //hacer(nico): This shouldn't be here!
           //opt.onAfterCompute();
         }       
       })).start();
@@ -7207,7 +7207,6 @@ Graph.Plot = {
           for(var s in ctxObj) {
             ctx[s] = node.getCanvasStyle(s);
           }
-
           this.nodeTypes[f].render.call(this, node, canvas, animating);
           ctx.restore();
         }
@@ -8150,7 +8149,7 @@ var NodeDim = {
         style.width  = autoWidth? 'auto' : width + 'px';
         style.height = autoHeight? 'auto' : height + 'px';
         
-        //TODO(nico) should let the user choose what to insert here.
+        //hacer(nico) should let the user choose what to insert here.
         label.innerHTML = n.name;
         
         var offsetWidth  = label.offsetWidth,
@@ -8970,7 +8969,8 @@ $jit.ST= (function() {
             });
           (end code)
         */
-        select: function(id, onComplete) {
+        //Extra field Center, for not centering the tree canvas.
+        select: function(id, onComplete, center) {
             var group = this.group, geom = this.geom;
             var node=  this.graph.getNode(id), canvas = this.canvas;
             var root  = this.graph.getNode(this.root);
@@ -8982,18 +8982,20 @@ $jit.ST= (function() {
             this.clickedNode= node;
             this.requestNodes(node, {
                 onComplete: function(){
-                    group.hide(group.prepare(getNodesToHide.call(that)), complete);
-                    geom.setRightLevelToShow(node, canvas);
-                    that.compute("current");
-                    that.graph.eachNode(function(n) { 
+                    if (center) {
+                      group.hide(group.prepare(getNodesToHide.call(that)), complete);
+                      geom.setRightLevelToShow(node, canvas);
+                      that.compute("current");
+                      that.graph.eachNode(function (n) {
                         var pos = n.pos.getc(true);
                         n.startPos.setc(pos.x, pos.y);
                         n.endPos.setc(pos.x, pos.y);
-                        n.visited = false; 
-                    });
-                    var offset = { x: complete.offsetX, y: complete.offsetY };
+                        n.visited = false;
+                      });
+                      var offset = {x: complete.offsetX, y: complete.offsetY};
 
-                    that.geom.translate(node.endPos.add(offset).$scale(-1), ["start", "current", "end"]);
+                      that.geom.translate(node.endPos.add(offset).$scale(-1), ["start", "current", "end"]);
+                    }
                     group.show(getNodesToShow.call(that));
                     that.plot();
                     complete.onAfterCompute(that.clickedNode);
@@ -9172,7 +9174,7 @@ $jit.ST.Group = new Class({
     hide: function(nodes, controller) {
         var viz = this.viz;
         for(var i=0; i<nodes.length; i++) {
-            // TODO nodes are requested on demand, but not
+            // hacer nodes are requested on demand, but not
             // deleted when hidden. Would that be a good feature?
             // Currently that feature is buggy, so I'll turn it off
             // Actually this feature is buggy because trimming should take
@@ -9282,7 +9284,7 @@ $jit.ST.Group = new Class({
           var root = config.multitree && !('$orn' in node.data);
           var orns = root && node.data.$orns;
           node.eachSubgraph(function(n) { 
-            // TODO(nico): Cleanup
+            // hacer(nico): Cleanup
         	  // special check for root node subnodes when
         	  // multitree is checked.
         	  if(root && orns && orns.indexOf(n.data.$orn) > 0 
@@ -9363,7 +9365,7 @@ $jit.ST.Geom = new Class({
        Works like a CSS property, either _top-right-bottom-left_ or _top|bottom - left|right_.
      */
     dispatch: function() {
-    	  // TODO(nico) should store Array.prototype.slice.call somewhere.
+    	  // hacer(nico) should store Array.prototype.slice.call somewhere.
         var args = Array.prototype.slice.call(arguments);
         var s = args.shift(), len = args.length;
         var val = function(a) { return typeof a == 'function'? a() : a; };
@@ -12534,7 +12536,7 @@ $jit.Sunburst.$extend = true;
             dim = Math.max(from.norm(), to.norm());
         this.edgeHelper.hyperline.render(from.$scale(1/dim), to.$scale(1/dim), dim, canvas);
       },
-      'contains': $.lambda(false) //TODO(nico): Implement this!
+      'contains': $.lambda(false) //hacer(nico): Implement this!
     }
   });
 
@@ -15251,14 +15253,14 @@ TM.Base = {
               that.clickedNode = clickedNode;
               that.compute('end');
               //animate positions
-              //TODO(nico) commenting this line didn't seem to throw errors...
+              //hacer(nico) commenting this line didn't seem to throw errors...
               that.clickedNode = previousClickedNode;
               that.fx.animate({
                 modes:['linear', 'node-property:width:height'],
                 duration: 1000,
                 onComplete: function() { 
                   that.busy = false;
-                  //TODO(nico) check comment above
+                  //hacer(nico) check comment above
                   that.clickedNode = clickedNode;
                 }
               });
