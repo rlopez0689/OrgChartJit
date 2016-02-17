@@ -7,6 +7,9 @@ A javascript tool for viewing and managing organizational charts. Using [JIT JS]
 
 ## Code Example
 Using a JSON you can display an organizational chart. Also, you can add nodes, delete nodes, edit nodes and view extra information of the nodes.
+![Principal](screenshots/principaldiagram.png "Principal Diagram View")
+It has 3 states. Normal, Selected and Collapse.
+
 
 ## Motivation
 I was searching in the internet for a tool to make organizational charts. I found Jit and i think i`ts amazing. 
