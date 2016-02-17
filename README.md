@@ -1,7 +1,7 @@
 # OrgChartJit
 
 ## Synopsis
-A javascript tool for viewing and managing organizational charts. Using JIT JS.
+A javascript tool for viewing and managing organizational charts. Using [JIT JS](http://philogb.github.io/jit/index.html).
 
 [DEMO](http://rlopez0689.github.io/OrgChartJit/)
 
