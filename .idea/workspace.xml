@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c47c305b-78da-466e-ad83-7f541474103a" name="Default" comment="- gitignore">
+    <list default="true" id="c47c305b-78da-466e-ad83-7f541474103a" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/OrgChartJit.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
@@ -9,7 +9,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -128,7 +127,7 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2630" />
+    <option name="x" value="2820" />
     <option name="y" value="23" />
     <option name="width" value="1324" />
     <option name="height" value="1057" />
@@ -303,11 +302,17 @@
       <option name="project" value="LOCAL" />
       <updated>1455724106376</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- Forget Idea">
+      <created>1455724282720</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1455724282720</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2630" y="23" width="1324" height="1057" extended-state="0" />
+    <frame x="2820" y="23" width="1324" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16163142" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -346,7 +351,8 @@
     <MESSAGE value="- Fix error in file jit for jit2." />
     <MESSAGE value="- Chnage title modal add node" />
     <MESSAGE value="- gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="- gitignore" />
+    <MESSAGE value="- Forget Idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Forget Idea" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
