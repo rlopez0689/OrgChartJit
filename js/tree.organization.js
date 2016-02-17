@@ -1,6 +1,5 @@
 // ST var
 var st;
-var timer;
 (function() {
     var ua = navigator.userAgent,
         iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
