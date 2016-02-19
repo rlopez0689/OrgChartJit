@@ -35,7 +35,8 @@ function init(){
         //enable panning
         Navigation: {
             enable:true,
-            panning:true
+            panning:true,
+            zooming: 5
         },
         //set node and edge styles
         //set overridable=true for styling individual
@@ -142,6 +143,7 @@ function init(){
                         node.data.$color = '#4b6a86'
                 }
             }
+            setLabelScaling();
 
         },
 
@@ -326,6 +328,15 @@ function make_movement_action(node_move){
             }
         });
     }
+}
+
+function setLabelScaling() {
+    var x = st.canvas.scaleOffsetX,
+    y = st.canvas.scaleOffsetY;
+    $(".node").css("-moz-transform", "scale(" + x +"," +  y + ")");
+    $(".node").css("-webkit-transform", "scale(" + x +"," + y + ")");
+    $(".node").css("-ms-transform", "scale(" + x +"," +  y + ")");
+    $(".node").css("-o-transform", "scale(" + x +"," +  y + ")");
 }
 
 $( document ).ready(function() {
