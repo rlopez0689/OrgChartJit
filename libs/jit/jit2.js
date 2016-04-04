@@ -2625,7 +2625,7 @@ Extras.Classes.Navigation = new Class({
     this.canvas.scale(ans, ans);
   },
   
-  onMouseDown: function(e, win, eventInfo) {
+  onMouseDown : function(e, win, eventInfo) {
     if(!this.config.panning) return;
     if(this.config.panning == 'avoid nodes' && (this.dom? this.isLabel(e, win) : eventInfo.getNode())) return;
     this.pressed = true;
@@ -2640,7 +2640,22 @@ Extras.Classes.Navigation = new Class({
     this.pos.y *= sy;
     this.pos.y += oy;
   },
-  
+  onTouchStart : function(e, win, eventInfo) {
+    if(!this.config.panning) return;
+    if(this.config.panning == 'avoid nodes' && (this.dom? this.isLabel(e, win) : eventInfo.getNode())) return;
+    this.pressed = true;
+    this.pos = eventInfo.getPos();
+    var canvas = this.canvas,
+        ox = canvas.translateOffsetX,
+        oy = canvas.translateOffsetY,
+        sx = canvas.scaleOffsetX,
+        sy = canvas.scaleOffsetY;
+    this.pos.x *= sx;
+    this.pos.x += ox;
+    this.pos.y *= sy;
+    this.pos.y += oy;
+  },
+
   onMouseMove: function(e, win, eventInfo) {
     if(!this.config.panning) return;
     if(!this.pressed) return;
@@ -2661,8 +2676,31 @@ Extras.Classes.Navigation = new Class({
     this.pos = currentPos;
     this.canvas.translate(x * 1/sx, y * 1/sy);
   },
-  
+  onTouchMove: function(e, win, eventInfo) {
+    if(!this.config.panning) return;
+    if(!this.pressed) return;
+    if(this.config.panning == 'avoid nodes' && (this.dom? this.isLabel(e, win) : eventInfo.getNode())) return;
+    var thispos = this.pos,
+        currentPos = eventInfo.getPos(),
+        canvas = this.canvas,
+        ox = canvas.translateOffsetX,
+        oy = canvas.translateOffsetY,
+        sx = canvas.scaleOffsetX,
+        sy = canvas.scaleOffsetY;
+    currentPos.x *= sx;
+    currentPos.y *= sy;
+    currentPos.x += ox;
+    currentPos.y += oy;
+    var x = currentPos.x - thispos.x,
+        y = currentPos.y - thispos.y;
+    this.pos = currentPos;
+    this.canvas.translate(x * 1/sx, y * 1/sy);
+  },
   onMouseUp: function(e, win, eventInfo, isRightClick) {
+    if(!this.config.panning) return;
+    this.pressed = false;
+  },
+  onTouchEnd: function(e, win, eventInfo, isRightClick) {
     if(!this.config.panning) return;
     this.pressed = false;
   }
